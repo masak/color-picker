@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Form input</title>
+    <style>
+      .color {
+        border: solid 1px black;
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="color-selector">
+      <p>Red: <input class="red" type="range" min="0" max="255"></p>
+      <p>Green: <input class="green" type="range" min="0" max="255"></p>
+      <p>Blue: <input class="blue" type="range" min="0" max="255"></p>
+  
+      <div class="color"></div>
+    </div>
+
+    <div class="color-selector">
+      <p>Red: <input class="red" type="range" min="0" max="255"></p>
+      <p>Green: <input class="green" type="range" min="0" max="255"></p>
+      <p>Blue: <input class="blue" type="range" min="0" max="255"></p>
+  
+      <div class="color"></div>
+    </div>  
+  </body>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script>
+    let $redRange = $(".red");
+    let $greenRange = $(".green");
+    let $blueRange = $(".blue");
+
+    function updateColor(event) {
+      let $colorSelector = $(event.target).closest(".color-selector");
+      updateSelector($colorSelector);
+    }
+
+    function updateSelector(selector) {
+      let r = selector.find(".red").val();
+      let g = selector.find(".green").val();
+      let b = selector.find(".blue").val();
+      selector.find(".color").css("background", `rgb(${r},${g},${b})`);
+    }
+
+    $redRange.on("input", updateColor);
+    $greenRange.on("input", updateColor);
+    $blueRange.on("input", updateColor);
+
+    for (let selector of $(".color-selector")) {
+      updateSelector($(selector));
+    }
+  </script>
+</html>
